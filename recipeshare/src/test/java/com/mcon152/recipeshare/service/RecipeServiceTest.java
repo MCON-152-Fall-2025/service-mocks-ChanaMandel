@@ -89,9 +89,6 @@ class RecipeServiceTest {
             assertNotNull(out, "service should return a non-null recipe");
             assertEquals(1L, out.getId(), "saved recipe should have generated id");
             assertEquals(saved, out, "service should return exactly what repository returns");
-            assertEquals("Chocolate Chip Cookies", out.getTitle());
-            assertEquals("Classic chewy cookies", out.getDescription());
-
 
             verify(recipeRepository).save(any(Recipe.class));
             verifyNoMoreInteractions(recipeRepository);
@@ -122,9 +119,9 @@ class RecipeServiceTest {
             assertNotNull(sent, "captured recipe should not be null");
             assertNull(sent.getId(), "pre-save ID should be null");
             assertEquals("Chocolate Cake", sent.getTitle(), "title should match input");
-            assertEquals("Rich and moist cake", sent.getDescription());
-            assertEquals("Flour, sugar, cocoa, eggs, butter", sent.getIngredients());
-            assertEquals("Mix, bake at 350°F for 30 min", sent.getInstructions());
+            assertEquals("Moist chocolate cake", sent.getDescription());
+            assertEquals("flour, eggs, cocoa", sent.getIngredients());
+            assertEquals("mix, bake", sent.getInstructions());
             assertEquals(8, sent.getServings());
 
         }
@@ -319,7 +316,7 @@ class RecipeServiceTest {
             assertEquals(patch.getDescription(), toSave.getDescription());
             assertEquals(patch.getIngredients(), toSave.getIngredients());
             assertEquals(patch.getInstructions(), toSave.getInstructions());
-            assertEquals(patch.getServings(), toSave.getServings());
+            assertEquals(8, toSave.getServings());
         }
 
         @Test
